@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { supabase } from "./supabaseClient"
 
 function App() {
+  const signInWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    })
+    if (error) console.error(error)
+    else console.log(data)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">Ni Connect 🚀</h1>
+      <button 
+        onClick={signInWithGoogle} 
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Login with Google
+      </button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
